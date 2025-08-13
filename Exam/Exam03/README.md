@@ -25,8 +25,8 @@
   * โค้ดส่วนลดจะถูกกำหนดเงื่อนไขตามหมวดหมู่สินค้า เช่น ใช้ได้กับทุกประเภทสินค้า, ใช้ได้เฉพาะเครื่องดื่ม, ใช้ได้เฉพาะเครื่องใช้ไฟฟ้า ฯลฯ
 * **คลังสินค้า**
   * คลังสินค้าในระบบมีเพียง 2 ประเภทคือ
-    * **Physical Product** สินค้ามีจำนวนจำกัดในคลัง หากสินค้าหมด จะไม่สามารถสั่งซื้อได้ จนกว่าจะถูกเติมเข้ามาใหม่
-    * **Digital Product** สินค้าไม่มีจำนวนจำกัด สามารถสั่งซื้อได้ตลอดเวลา
+    * **Digital Product** เป็นสินค้าที่ไม่มีจำนวนจำกัด สามารถสั่งซื้อได้ตลอดเวลา
+    * **Physical Product** เป็นสินค้ามีจำนวนจำกัดในคลัง หากสินค้าหมด จะไม่สามารถสั่งซื้อได้ จนกว่าจะถูกเติมเข้ามาใหม่
 * **การชำระเงิน**
   * ผู้ใช้จะต้องเห็นราคาสินค้าที่ต้องจ่ายในตะกร้า ทั้งก่อนคิดส่วนลด และ หลังคิดส่วนลด
   * ตะกร้าจะต้องถูกกำหนดที่อยู่จัดส่งและเบอร์โทรติดต่อก่อนถึงจะสามารถนำมาชำระเงินได้
@@ -41,16 +41,17 @@
 
 ### ตัวอย่าง REST API  
 ```
+# สร้างผู้ใช้ใหม่
 POST /api/users
 Content-Type: application/json
 
-Request:
+# Request:
 {
     "name": "John Doe",
     "email": "john.doe@example.com",
 }
 
-Response:
+# Response:
 {
     "id": 1234,
     "name": "John Doe",
@@ -58,34 +59,36 @@ Response:
 }
 ```
 
-### ตัวอย่าง Schema
+### ตัวอย่าง Database Schema
 ```mermaid
 erDiagram
-    CAR ||--o{ NAMED-DRIVER : allows
-    CAR {
-        string registrationNumber PK
-        string make
-        string model
-        string[] parts
-    }
-    PERSON ||--o{ NAMED-DRIVER : is
-    PERSON {
-        string driversLicense PK "The license #"
-        string(99) firstName "Only 99 characters are allowed"
-        string lastName
-        string phone UK
-        int age
-    }
-    NAMED-DRIVER {
-        string carRegistrationNumber PK, FK
-        string driverLicence PK, FK
-    }
-    MANUFACTURER only one to zero or more CAR : makes
+  USER ||--o{ REGISTRATION : has
+  COURSE ||--o{ REGISTRATION : has
+
+  USER {
+      user_id INT PK
+      user_name VARCHAR
+      email VARCHAR
+  }
+
+  COURSE {
+      course_id INT PK
+      course_name VARCHAR
+      credits INT
+  }
+
+  REGISTRATION {
+      registration_id INT PK
+      student_id INT FK
+      course_id INT FK
+      registration_date DATE
+      grade VARCHAR
+  }
 ```
 
 
 > **หมายเหตุ**
-> 1. สามารถใช้ tools ที่ถนัดในการเขียน diagram ได้ (ไม่จำเป็นต้องเขียนเป็น mermaid syntax)
+> 1. สามารถใช้เครื่องมือที่ถนัดในการเขียน diagram ได้ (ไม่จำเป็นต้องเขียนเป็น mermaid syntax ตามตัวอย่าง)
 > 2. สามารถแนบไฟล์รูปเข้าไปในโฟเดอร์ `Exam03` ได้ และใช้ markdown syntax อธิบายรูปประกอบการตอบคำถาม
 
 ## เงื่อนไขการให้คะแนน

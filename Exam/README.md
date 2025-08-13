@@ -8,6 +8,7 @@
     * Visual Studio Community [(ลิงค์ดาวโหลด)](https://visualstudio.microsoft.com)
 2. .NET SDK 10.0 [(ลิงค์ดาวโหลด)](https://dotnet.microsoft.com/en-us/download/visual-studio-sdks)
 3. Git [(ลิงค์ดาวโหลด)](https://git-scm.com)
+4. การเขียนคำตอบต้องอยู่ในรูปแบบ Markdown [(ลิงค์การใช้ Markdown)](https://www.markdownguide.org/basic-syntax)
 
 ## วิธีการทำงาน
 1. ผู้สอบทำการ clone repository นี้ไปยังเครื่องที่จะทำการพัฒนา
